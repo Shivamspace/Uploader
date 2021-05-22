@@ -55,15 +55,15 @@
             File[] pathnames = f.listFiles();
             List<Documents> docs = new ArrayList<>();
     //public Documents(int id, String name, String type, String timestamp) {
-
+            Documents d = null;
             for (File pathname : pathnames) {
-                Documents d = new Documents();
+                d = new Documents();
                 d.setId(UUID.randomUUID());
                 d.setName(pathname.getName());
                 d.setType(Files.probeContentType(new File(pathname.toString()).toPath()));
                 d.setTimestamp(pathname.lastModified());
                 docs.add(d);
-                System.out.println(docs);
+//                System.out.println(docs);
             }
 
             return new ResponseEntity<List<Documents>>(docs, HttpStatus.OK);
