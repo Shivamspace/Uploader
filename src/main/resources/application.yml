@@ -1,0 +1,30 @@
+#spring:
+#  config:
+#    activate:
+#      on-profile: local
+#  servlet:
+#    multipart:
+#      max-file-size: 100KB
+#      max-request-size: 100KB
+#      enabled: true
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: test
+#  servlet:
+#    multipart:
+#      max-file-size: 200KB
+#      max-request-size: 200KB
+#      enabled: true
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: prod
+#  servlet:
+#    multipart:
+#      max-file-size: 300KB
+#      max-request-size: 300KB
+#      enabled: true
+#---

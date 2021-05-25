@@ -2,11 +2,12 @@ package com.example.uploader;
 
 import java.util.UUID;
 
+
 public class Documents {
 
     private UUID id;
     private String name;
-    private String  type;
+    private String type;
     private long timestamp;
 
     public Documents(UUID id, String name, String type, long timestamp) {
