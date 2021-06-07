@@ -9,12 +9,14 @@ public class Documents {
     private String name;
     private String type;
     private long timestamp;
+    private byte[] bytes;
 
-    public Documents(UUID id, String name, String type, long timestamp) {
+    public Documents(UUID id, String name, String type, long timestamp, byte[] bytes) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.timestamp = timestamp;
+        this.bytes=bytes;
     }
 
     public Documents() {
@@ -23,6 +25,12 @@ public class Documents {
 
     public UUID getId() {
         return id;
+    }
+    public byte[] getbytes() {
+        return bytes;
+    }
+    public void setbytes(byte[] id) {
+        this.bytes = id;
     }
 
     @Override

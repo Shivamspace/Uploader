@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -20,10 +21,10 @@ import java.util.UUID;
 @CrossOrigin("*")
 public class RequestController {
     public static final String UPLOAD_DIR = System.getProperty("user.dir") + "/" + "src/main/resources/uploads/";
-    private static final Logger logger = LoggerFactory.getLogger(RequestController.class);
+    private  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping("/uploader")
-    public ResponseEntity uploader(@RequestParam("fileName") String fileName, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity uploader(@RequestParam("fileName") String fileName, @NotNull @RequestParam("file") MultipartFile file) throws IOException {
 
         logger.debug("Request=>>" + fileName + file);
         File convertFile = new File(UPLOAD_DIR + fileName);
@@ -33,7 +34,7 @@ public class RequestController {
         try (FileOutputStream fout = new FileOutputStream(convertFile)) {
             fout.write(file.getBytes());
         } catch (MaxUploadSizeExceededException exe) {
-           throw new MaxUploadSizeExceededException(123333,exe);
+            throw new MaxUploadSizeExceededException(123333, exe);
         }
         logger.debug("Response=>" + new ResponseEntity(HttpStatus.CREATED));
         return new ResponseEntity(HttpStatus.CREATED);
@@ -47,10 +48,8 @@ public class RequestController {
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
 
-        ResponseEntity<Object> responseEntity = ResponseEntity.ok().contentLength(file.length())
-                .contentType(MediaType.parseMediaType("application/txt")).body(resource);
-
-        return responseEntity;
+        return ResponseEntity.ok().contentLength(file.length())
+                .contentType(MediaType.parseMediaType("application/txt")).<Object>body(resource);
     }
 
     @GetMapping("/listDocs")
@@ -64,6 +63,8 @@ public class RequestController {
         Documents d = null;
         for (File pathname : pathnames) {
             d = new Documents();
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(pathname));
+           // d.setbytes(resource.getInputStream().readAllBytes() );
             d.setId(UUID.randomUUID());
             d.setName(pathname.getName());
             d.setType(Files.probeContentType(new File(pathname.toString()).toPath()));
