@@ -59,18 +59,15 @@ public class RequestController {
 
         File[] pathnames = f.listFiles();
         List<Documents> docs = new ArrayList<>();
-        //public Documents(int id, String name, String type, String timestamp) {
         Documents d = null;
         for (File pathname : pathnames) {
             d = new Documents();
             InputStreamResource resource = new InputStreamResource(new FileInputStream(pathname));
-           // d.setbytes(resource.getInputStream().readAllBytes() );
             d.setId(UUID.randomUUID());
             d.setName(pathname.getName());
             d.setType(Files.probeContentType(new File(pathname.toString()).toPath()));
             d.setTimestamp(pathname.lastModified());
             docs.add(d);
-//                System.out.println(docs);
         }
 
         return new ResponseEntity<List<Documents>>(docs, HttpStatus.OK);

@@ -77,7 +77,7 @@ class ApplicationTests {
         byte[] file = new byte[getRandom(1) * 1024 * 200];
         ResponseEntity<String> response = restTemplate.postForEntity("/uploader", prepareRequest(fileName, file), String.class);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(false, uploadedFile.exists());
         assertTrue(containsString("Maximum upload size exceeded").matches(response.getBody()));
     }
