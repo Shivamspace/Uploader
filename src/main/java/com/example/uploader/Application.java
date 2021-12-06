@@ -1,10 +1,9 @@
 package com.example.uploader;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
+import org.slf4j.*;
+
+import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 
