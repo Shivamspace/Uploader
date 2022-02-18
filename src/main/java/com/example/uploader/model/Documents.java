@@ -1,4 +1,4 @@
-package com.example.uploader;
+package com.example.uploader.model;
 
 import java.util.UUID;
 
